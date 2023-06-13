@@ -32,26 +32,25 @@ function Intro({user, setUser}: props) {
     if (!isSetup) {
       try {
         // Set up the player
-        await TrackPlayer.setupPlayer({});
+        await TrackPlayer.setupPlayer();
         setIsSetup(true);
-
-        // await TrackPlayer.reset();
-
-        // Add a track to the queue
-        await TrackPlayer.add({
-          id: 'trackId',
-          url: require('../components/track.mp3'), // Use require() to provide the correct file path
-          title: 'Track Title',
-          artist: 'Track Artist',
-        });
-
-        // Start playing the track
-
-        // Adjust the delay as needed
       } catch (error) {
         console.log(error);
       }
     }
+    // else {
+    // //   // await TrackPlayer.reset();
+    // // }
+
+    await TrackPlayer.add({
+      id: 'trackId',
+      url: require('../components/track.mp3'), // Use require() to provide the correct file path
+      title: 'Track Title',
+      artist: 'Track Artist',
+    });
+
+    TrackPlayer.setVolume(0.5);
+
     // await TrackPlayer.setupPlayer();
 
     // // Add a track to the queue
@@ -213,10 +212,11 @@ function Intro({user, setUser}: props) {
           <Circle
             cx="50"
             cy="50"
-            r="44"
-            stroke="#0074cc"
-            strokeWidth="5"
-            fill="blue"
+            r="46"
+            // stroke="#0074cc"
+            stroke="#088F8F"
+            strokeWidth="4"
+            fill="white"
           />
           {user && user.image && (
             <Image
@@ -237,19 +237,54 @@ function Intro({user, setUser}: props) {
           {/* <Button title="Delete async storage" onPress={() => deleteUser()} /> */}
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={async () => {
-          await setup();
-          console.log('after Setup');
-          await TrackPlayer.play();
-          console.log('after Playing');
-        }}>
-        <Text
-          style={{color: 'white', fontSize: 20, fontFamily: 'Ubuntu-Regular'}}>
-          Play Sound
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity
+          style={styles.buttons}
+          onPress={async () => {
+            // await setup();
+            await TrackPlayer.pause();
+          }}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 20,
+              fontFamily: 'Ubuntu-Regular',
+            }}>
+            <FontAwesome5 name={'pause'} style={{fontSize: 20}} />
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttons}
+          onPress={async () => {
+            await setup();
+            await TrackPlayer.play();
+          }}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 20,
+              fontFamily: 'Ubuntu-Regular',
+            }}>
+            <FontAwesome5 name={'play'} style={{fontSize: 20}} />
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.buttons}
+          onPress={async () => {
+            await setup();
+            await TrackPlayer.stop();
+          }}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 20,
+              fontFamily: 'Ubuntu-Regular',
+            }}>
+            <FontAwesome5 name={'stop'} style={{fontSize: 20}} />
+          </Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 }
@@ -269,13 +304,21 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
   },
-  button: {
-    backgroundColor: '#916ec9',
-    padding: 5,
+  buttons: {
+    // backgroundColor: '#916ec9',
+    backgroundColor: '#088F8F',
+    // backgroundColor: 'black',
+    padding: 15,
+    height: 50,
+    width: 50,
+    alignItems: 'center',
     borderRadius: 10,
-    paddingHorizontal: 20,
-    marginBottom: 50,
+    marginHorizontal: 5,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
     marginTop: 20,
+    marginBottom: 50,
   },
   imageContainer: {
     borderWidth: 2,

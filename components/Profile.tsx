@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
   },
   floatingButton: {
     backgroundColor: '#088F8F',
-    width: 50,
+    // backgroundColor: '#916ec9',
+    width: 60,
     height: 40,
     position: 'absolute',
     zIndex: 4,
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
     right: 0,
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     color: 'white',

@@ -71,28 +71,7 @@ function EditIntro({user, setUser}: props) {
               onPress={() => pickImageFromGallery()}
             />
           </ImageBackground>
-
-          // <Image
-          //   style={{height: 100, width: 100}}
-          //   source={{uri: user?.image}}
-          // />
         )}
-        {/* <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            pickImageFromGallery();
-          }}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 15,
-              padding: 5,
-              textAlign: 'center',
-              fontFamily: 'Ubuntu-Regular',
-            }}>
-            Pick Image
-          </Text>
-        </TouchableOpacity> */}
       </View>
       <Text style={styles.labels}>Name:</Text>
       <TextInput
